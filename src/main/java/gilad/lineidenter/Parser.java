@@ -14,7 +14,7 @@ public class Parser {
     public List<Identable> parseFile(Path file) throws IOException {
 
         List<Map.Entry<String, Integer>> linesToWsCount = Files.readAllLines(file).stream()
-                .map(line ->new AbstractMap.SimpleImmutableEntry<>(line.trim(), countLeadingWhitespace(line)))
+                .map(line -> new AbstractMap.SimpleImmutableEntry<>(line.trim(), countLeadingWhitespace(line)))
                 .collect(Collectors.toList());
 
         if (linesToWsCount.isEmpty()) {
@@ -23,16 +23,6 @@ public class Parser {
         }
 
         return IdentableFactory.get(linesToWsCount);
-    }
-
-    private List<Map.Entry<String, Integer>> mapByWhitespaceCount(List<String> lines) {
-        List<Map.Entry<String, Integer>> linesToWsCount = new ArrayList<>();
-        for (String line : lines) {
-            linesToWsCount.add(
-                    new AbstractMap.SimpleImmutableEntry<>(line.trim(), countLeadingWhitespace(line))
-            );
-        }
-        return linesToWsCount;
     }
 
     private static int countLeadingWhitespace(String line) {
